@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>たまの1週間足痩せカレンダー</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Shippori+Mincho:wght@600;700&family=Klee+One:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf6f1; --paper:#fffdfa; --ink:#4a3a35; --sub:#8a766f;
+  --coral:#ec7a4f; --coral-soft:#fbe3d6; --rose:#d98c8c; --rose-soft:#f6e3e1;
+  --beige:#efe4d8; --gold:#c9a46a; --line:#ead9cc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Zen Maru Gothic",sans-serif;line-height:1.85;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px}
+.serif{font-family:"Shippori Mincho",serif}
+.hand{font-family:"Klee One",cursive}
+
+/* hero */
+.hero{position:relative;padding:34px 0 26px;text-align:center;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,var(--coral-soft),transparent 60%),radial-gradient(circle at 80% 20%,var(--rose-soft),transparent 55%);z-index:0}
+.hero>*{position:relative;z-index:1}
+.ribbon{display:inline-block;font-size:12px;letter-spacing:.18em;color:var(--coral);border:1px solid var(--coral);border-radius:999px;padding:3px 14px;background:#fff8}
+.hero h1{font-size:34px;line-height:1.35;margin:16px 0 6px;font-weight:700}
+.hero h1 small{display:block;font-size:15px;letter-spacing:.2em;color:var(--sub);font-weight:600}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.lead{font-size:14px;color:var(--sub)}
+.hero-photo{position:relative;width:250px;margin:24px auto 0}
+.hero-photo .ph{width:250px;height:250px;border-radius:50%;overflow:hidden;border:6px solid #fff;box-shadow:0 10px 30px rgba(180,120,100,.18)}
+.hero-photo .ph img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.badge{position:absolute;right:-26px;bottom:6px;width:112px;height:112px;border-radius:50%;background:var(--coral);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.2;box-shadow:0 6px 16px rgba(236,122,79,.35);transform:rotate(8deg)}
+.badge b{font-size:24px;font-family:"Shippori Mincho",serif}
+.badge span{font-size:11px}
+.bubble{position:absolute;left:-30px;top:14px;background:#fff;border-radius:18px;padding:6px 12px;font-size:13px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.bubble::after{content:"";position:absolute;right:14px;bottom:-7px;border:7px solid transparent;border-top-color:#fff;border-bottom:0}
+
+/* sections */
+section{padding:26px 0}
+.sec-title{text-align:center;margin-bottom:18px}
+.sec-title .en{font-size:11px;letter-spacing:.3em;color:var(--gold)}
+.sec-title h2{font-family:"Shippori Mincho",serif;font-size:22px;line-height:1.5}
+.card{background:var(--paper);border-radius:22px;padding:22px 20px;box-shadow:0 6px 24px rgba(160,110,90,.08);border:1px solid var(--line)}
+
+/* letter */
+.letter{display:flex;gap:14px;align-items:flex-start}
+.letter .av{flex:0 0 70px;height:70px;border-radius:50%;overflow:hidden;border:3px solid var(--coral-soft)}
+.letter .av img{width:100%;height:100%;object-fit:cover}
+.letter p{font-size:14.5px}
+.letter p+p{margin-top:10px}
+.mark{background:linear-gradient(transparent 62%,var(--coral-soft) 62%);font-weight:700}
+
+/* before after */
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}
+.ba img{border-radius:16px}
+.nums{list-style:none;font-size:14px}
+.nums li{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:7px 0}
+.nums b{color:var(--coral);font-family:"Shippori Mincho",serif;font-size:17px}
+.note{font-size:11.5px;color:var(--sub);margin-top:10px}
+
+/* how to */
+.steps{counter-reset:s;list-style:none;display:grid;gap:10px}
+.steps li{counter-increment:s;display:flex;gap:12px;align-items:center;font-size:14.5px;background:var(--paper);border-radius:16px;padding:12px 14px;border:1px solid var(--line)}
+.steps li::before{content:counter(s);flex:0 0 30px;height:30px;border-radius:50%;background:var(--coral);color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Shippori Mincho",serif}
+
+/* progress */
+.progress{position:sticky;top:0;z-index:5;background:rgba(251,246,241,.92);backdrop-filter:blur(6px);padding:10px 0;border-bottom:1px solid var(--line)}
+.progress .row{display:flex;align-items:center;gap:10px;font-size:13px}
+.bar{flex:1;height:10px;border-radius:99px;background:var(--beige);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--coral));transition:width .5s}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:8px}
+.dots a{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--sub);text-decoration:none;background:#fff}
+.dots a.done{background:var(--coral);border-color:var(--coral);color:#fff}
+
+/* day cards */
+.day{margin-bottom:22px;scroll-margin-top:96px}
+.day .card{padding:0;overflow:hidden}
+.day-photo{position:relative;height:210px}
+.day-photo img{width:100%;height:100%;object-fit:cover}
+.day-no{position:absolute;left:14px;top:14px;background:#fff;border-radius:16px;padding:6px 12px;text-align:center;line-height:1.1;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.day-no small{display:block;font-size:10px;letter-spacing:.2em;color:var(--gold)}
+.day-no b{font-family:"Shippori Mincho",serif;font-size:26px;color:var(--coral)}
+.time{position:absolute;right:14px;bottom:14px;background:rgba(74,58,53,.75);color:#fff;font-size:12px;border-radius:99px;padding:3px 12px}
+.day-body{padding:18px 20px 20px}
+.tag{display:inline-block;font-size:11.5px;color:var(--rose);background:var(--rose-soft);border-radius:99px;padding:1px 10px;margin-bottom:6px}
+.day h3{font-family:"Shippori Mincho",serif;font-size:20px;line-height:1.5;margin-bottom:10px}
+.how{list-style:none;font-size:14px;display:grid;gap:6px;margin:8px 0 12px}
+.how li{padding-left:22px;position:relative}
+.how li::before{content:"✿";position:absolute;left:0;color:var(--coral);font-size:12px;top:2px}
+.result{background:var(--coral-soft);border-radius:14px;padding:10px 14px 10px 70px;font-size:13.5px;margin:10px 0;position:relative;min-height:74px}.result .rf{position:absolute;left:10px;top:12px;width:50px;height:50px;border-radius:50%;overflow:hidden;border:2px solid #fff}.result .rf img{width:100%;height:100%;object-fit:cover}
+.result .hand{color:var(--coral);font-size:14px}
+.result b{color:var(--coral)}
+.zubora{font-size:13px;color:var(--sub);border-left:3px solid var(--rose-soft);padding-left:10px;margin:8px 0 14px}
+.check{width:100%;border:0;border-radius:99px;padding:13px;font:700 15px "Zen Maru Gothic",sans-serif;background:#fff;color:var(--coral);border:1.5px solid var(--coral);cursor:pointer;transition:.25s}
+.check.on{background:var(--coral);color:#fff}
+.check:active{transform:scale(.98)}
+
+/* record */
+.rec table{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:14px}
+.rec th{font-weight:500;color:var(--sub);font-size:12px}
+.rec td{text-align:center}
+.rec td:first-child{text-align:left;font-weight:700}
+.rec input{width:74px;padding:8px 6px;border:1px solid var(--line);border-radius:10px;text-align:center;font:500 15px "Zen Maru Gothic",sans-serif;background:#fff;color:var(--ink)}
+.diff{font-family:"Shippori Mincho",serif;color:var(--coral);font-weight:700;min-width:56px;display:inline-block}
+
+/* habits */
+.habits{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.habits div{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 6px;font-size:12.5px;line-height:1.5}
+.habits span{display:block;font-size:24px;margin-bottom:4px}
+
+/* closing */
+.closing{text-align:center}
+.closing .av{width:120px;height:120px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:5px solid #fff;box-shadow:0 8px 22px rgba(180,120,100,.18)}
+.closing .av img{width:100%;height:100%;object-fit:cover}
+.closing p{font-size:14.5px}
+.btn{display:inline-block;margin-top:18px;background:linear-gradient(90deg,var(--rose),var(--coral));color:#fff;text-decoration:none;border-radius:99px;padding:14px 30px;font-weight:700;box-shadow:0 8px 18px rgba(236,122,79,.3)}
+footer{font-size:11px;color:var(--sub);text-align:center;padding:24px 18px 40px;line-height:1.7}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(74,58,53,.45);display:none;align-items:center;justify-content:center;z-index:20;padding:20px}
+.modal.show{display:flex}
+.modal .card{max-width:360px;text-align:center}
+.modal h3{font-family:"Shippori Mincho",serif;font-size:22px;color:var(--coral);margin:8px 0}
+.modal .av{width:110px;height:110px;border-radius:50%;overflow:hidden;margin:0 auto}
+.modal .av img{width:100%;height:100%;object-fit:cover}
+.modal button{margin-top:14px;border:0;background:var(--coral);color:#fff;border-radius:99px;padding:10px 26px;font:700 14px "Zen Maru Gothic",sans-serif}
+.petal{position:fixed;top:-20px;font-size:20px;z-index:30;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="ribbon">FOLLOWER GIFT</span>
+    <h1 class="serif"><small>たまの</small>1週間<em>足痩せ</em><br>カレンダー</h1>
+    <p class="lead">運動嫌い・ズボラな私でも続いた<br>「1日5分」だけの脚やせ習慣</p>
+    <div class="hero-photo">
+      <div class="ph"><img src="img/face_cheeks.jpg" alt="たま"></div>
+      <div class="bubble hand">一緒にやろ〜！</div>
+      <div class="badge"><span>50日で</span><b>−8.5cm</b><span>太もも</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="card letter">
+      <div class="av"><img src="img/face_smile.jpg" alt=""></div>
+      <div>
+        <p>このカレンダーを開いてくれてありがとう🧡 34歳ママの、たまです。</p>
+        <p>出産してから、体重より気になったのが<span class="mark">「脚だけ戻らない」</span>こと。毎日バタバタで、運動は大の苦手…。</p>
+        <p>そこでSNSでバズってる脚やせを<span class="mark">片っぱしから3日間ずつ検証</span>してきました。その中から「ちゃんと数字が動いた」「ズボラでも続いた」ものだけを、1週間に詰めこんだよ✨</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-title"><div class="en">MY RESULT</div><h2>コツコツ続けたら、<br>脚はちゃんと変わった</h2></div>
+    <div class="card">
+      <div class="ba">
+        <img src="img/ba.jpg" alt="ビフォーアフター">
+        <div>
+          <p class="hand" style="color:var(--coral)">脚やせ40日目の記録</p>
+          <ul class="nums">
+            <li>太もも<b>−7.5cm</b></li>
+            <li>ふくらはぎ<b>−5.5cm</b></li>
+            <li>足首<b>−2cm</b></li>
+          </ul>
+          <p class="note">太もも 56→48.5cm<br>ふくらはぎ 36→30.5cm<br>足首 21→19cm</p>
+        </div>
+      </div>
+      <p class="note">※たま個人の結果です。効果には個人差があります。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-title"><div class="en">HOW TO USE</div><h2>使い方はかんたん</h2></div>
+    <ol class="steps">
+      <li>始める前に、太もも・ふくらはぎ・足首を測る</li>
+      <li>1日1つだけ、カレンダーのメニューをやる</li>
+      <li>できたら「今日もできた！」をタップ</li>
+      <li>7日目にもう一度測って、変化をチェック</li>
+    </ol>
+    <p class="note" style="text-align:center">※チェックと記録は、このスマホの中に保存されます</p>
+  </div>
+</section>
+
+<section class="rec" id="record">
+  <div class="wrap">
+    <div class="sec-title"><div class="en">MEASURE</div><h2>まずは今の脚を測ろう</h2></div>
+    <div class="card">
+      <table>
+        <tr><th></th><th>1日目</th><th>7日目</th><th>変化</th></tr>
+        <tr data-k="thigh"><td>太もも</td><td><input inputmode="decimal" placeholder="cm"></td><td><input inputmode="decimal" placeholder="cm"></td><td><span class="diff">—</span></td></tr>
+        <tr data-k="calf"><td>ふくらはぎ</td><td><input inputmode="decimal" placeholder="cm"></td><td><input inputmode="decimal" placeholder="cm"></td><td><span class="diff">—</span></td></tr>
+        <tr data-k="ankle"><td>足首</td><td><input inputmode="decimal" placeholder="cm"></td><td><input inputmode="decimal" placeholder="cm"></td><td><span class="diff">—</span></td></tr>
+      </table>
+      <p class="zubora" style="margin:6px 0 0">測るのは朝、トイレのあとがおすすめ。いつも同じ時間・同じ場所で測ってね（太ももは一番太いところ）。</p>
+    </div>
+  </div>
+</section>
+
+<div class="progress">
+  <div class="wrap">
+    <div class="row"><span>進み具合</span><div class="bar"><i id="bar"></i></div><span id="count">0/7</span></div>
+    <div class="dots" id="dots"></div>
+  </div>
+</div>
+
+<section id="calendar">
+  <div class="wrap" id="days"></div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-title"><div class="en">PLUS ONE</div><h2>できたらでOKのミニ習慣</h2></div>
+    <div class="habits">
+      <div><span>💧</span>お水を<br>こまめに飲む</div>
+      <div><span>🪑</span>1時間に1回<br>立ち上がる</div>
+      <div><span>🛁</span>シャワーより<br>湯船の日を</div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <div class="card">
+      <div class="av"><img src="img/face_cheer.jpg" alt=""></div>
+      <p class="serif" style="font-size:19px;margin-bottom:10px">7日間、本当におつかれさま！</p>
+      <p>私も何度も「変わらないかも…」って落ち込んだけど、<br>並べてみたら、ちゃんと変わってた。<br><br>あなたの脚も、きっと変われる🧡<br>結果や感想、インスタのDMで教えてね！</p>
+      <a class="btn" href="https://www.instagram.com/tama34_diet/" target="_blank" rel="noopener">たまのインスタを見る</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  ※ここで紹介している結果は、たま個人が3日間ずつ検証したときの記録です。効果には個人差があります。<br>
+  ※痛み・違和感があるときは無理をせず中止してください。妊娠中の方、持病やけががある方は、医師に相談してから行ってください。<br><br>
+  © tama34_diet
+</footer>
+
+<div class="modal" id="modal">
+  <div class="card">
+    <div class="av"><img src="img/face_fist.jpg" alt=""></div>
+    <h3>7日間コンプリート！</h3>
+    <p style="font-size:14px">ここまで続けたあなた、本当にえらい🥹<br>上の記録表で、7日目の数字を入れてみてね。</p>
+    <button onclick="closeModal()">記録を入れる</button>
+  </div>
+</div>
+
+<script>
+const DAYS=[
+ {img:"d1.jpg",time:"3分",tag:"足裏から全身スッキリ",title:"テレビを見ながら、青竹踏み",
+  how:["100均の青竹踏みに乗って、その場で足踏み","かかと・土踏まず・つま先と、踏む場所を少しずつずらす","最初は痛くてOK。慣れると気持ちいいに変わるよ"],
+  res:"3日間で <b>太もも−1cm／ふくらはぎ−1cm／足首−1cm</b>",
+  memo:"踏むだけなのに足首スッキリ。立ち方まで変わった！",
+  zubora:"青竹踏みがなければ、足の指をグーパー30回でもOK"},
+ {img:"d2.jpg",time:"左右30秒",tag:"むくみ撃退",title:"体重をのせるだけ、ふくらはぎほぐし",
+  how:["四つん這いになって、片方のすねを反対の足のふくらはぎに乗せる","ゆっくりお尻を後ろに引いて、体重をのせる","乗せる場所を少しずつ足首のほうへずらしていく"],
+  res:"3日間で <b>太もも−1cm</b>、ふくらはぎの数字もやっと動いた",
+  memo:"想像の5倍痛かったけど、次の朝は脚が軽い…！",
+  zubora:"痛すぎるときは、体重をかけすぎず「気持ちいい」くらいで"},
+ {img:"d3.jpg",time:"各30秒",tag:"張りをゆるめる",title:"フォームローラーで、ころころ",
+  how:["ふくらはぎの下にローラーを置いて、ゆっくり前後に転がす","太ももの前側・外側も同じように転がす","痛いところは止まって、深呼吸を3回"],
+  res:"3日間で <b>太もも−0.5cm／ふくらはぎ−0.5cm</b>",
+  memo:"即効性は控えめ。でも足が軽くなるから続けたいやつ",
+  zubora:"ローラーがなければ、お風呂で手でさするだけでもOK"},
+ {img:"d4.jpg",time:"30回",tag:"内もも",title:"寝たまま、足パカ",
+  how:["仰向けに寝て、両脚を天井に向けてまっすぐ上げる","脚を左右にパカッと開いて、ゆっくり閉じる","腰が浮かないように、おへそを床に近づけるイメージで"],
+  res:"3日間で <b>太もも−0.5cm</b>",
+  memo:"足が軽くなって、内ももがしっかり筋肉痛に",
+  zubora:"きつい日は10回×3セットに分けてOK"},
+ {img:"d5.jpg",time:"10回",tag:"脚全体・お尻",title:"椅子につかまって、かかと上げスクワット",
+  how:["椅子の背もたれにつかまって立つ","かかとを上げて、膝とかかとをくっつける","その形のまま、ゆっくり腰を落として戻る"],
+  res:"2日目で <b>太もも−0.5cm</b>。ふくらはぎほぐしと合わせた3日間で <b>足首−1.5cm</b>",
+  memo:"嬉しすぎて普通に泣いた日…！",
+  zubora:"膝が痛いときは、かかとの上げ下げだけでもOK"},
+ {img:"d6.jpg",time:"1分",tag:"ふくらはぎ・足首",title:"その場で、かるくジャンプ",
+  how:["肩の力を抜いて、その場に立つ","真上に小さく、リズムよくジャンプ","着地はつま先から、やさしく"],
+  res:"3日間で <b>太もも−1cm／ふくらはぎ−0.5cm／足首−1.5cm</b>",
+  memo:"足首きゅっ✨ 足が細い人って、足首が締まってるんだよね",
+  zubora:"下の階が気になる人・膝が痛い人は、かかとの上げ下げに変えてね"},
+ {img:"d7.jpg",time:"左右20秒×3",tag:"姿勢・前もも",title:"ゆったり、お尻ともも裏ストレッチ",
+  how:["脚を前後に大きく開いて、お尻・もも裏をのばす","そのまま両ひじを床について、さらに深く","後ろ脚の膝をついて、前ももをのばす"],
+  res:"3日間で <b>太もも−0.5cm</b>",
+  memo:"前ももがのびて、姿勢までよくなった気がする！",
+  zubora:"最終日！ 終わったら、上の記録表で7日目を測ってね"}
+];
+const FACES=["face_wow.jpg","face_thumbs.jpg","face_roller.jpg","face_pose.jpg","face_fist.jpg","face_smile.jpg","face_cheeks.jpg"];
+const KEY="tama_ashiyase_v1";
+let st={};try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){st={}}
+st.done=st.done||{};st.rec=st.rec||{};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+
+const days=document.getElementById('days'),dots=document.getElementById('dots');
+DAYS.forEach((d,i)=>{
+  const n=i+1;
+  days.insertAdjacentHTML('beforeend',`
+  <article class="day" id="day${n}"><div class="card">
+    <div class="day-photo"><img src="img/${d.img}" alt="" loading="lazy">
+      <div class="day-no"><small>DAY</small><b>${n}</b></div><div class="time">⏱ ${d.time}</div></div>
+    <div class="day-body">
+      <span class="tag">${d.tag}</span>
+      <h3>${d.title}</h3>
+      <ul class="how">${d.how.map(h=>`<li>${h}</li>`).join('')}</ul>
+      <div class="result"><div class="rf"><img src="img/${FACES[i]}" alt=""></div><span class="hand">たまの検証結果</span><br>${d.res}<br><span style="font-size:12.5px">「${d.memo}」</span></div>
+      <p class="zubora">ズボラさんへ：${d.zubora}</p>
+      <button class="check" data-n="${n}">今日もできた！</button>
+    </div></div></article>`);
+  dots.insertAdjacentHTML('beforeend',`<a href="#day${n}" data-n="${n}">${n}</a>`);
+});
+function render(){
+  let c=0;
+  document.querySelectorAll('.check').forEach(b=>{const on=!!st.done[b.dataset.n];b.classList.toggle('on',on);b.textContent=on?'✓ できた！えらい！':'今日もできた！';if(on)c++});
+  document.querySelectorAll('.dots a').forEach(a=>a.classList.toggle('done',!!st.done[a.dataset.n]));
+  document.getElementById('bar').style.width=(c/7*100)+'%';
+  document.getElementById('count').textContent=c+'/7';
+  return c;
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.check');if(!b)return;
+  const n=b.dataset.n;st.done[n]=!st.done[n];save();
+  if(st.done[n])petals(8);
+  if(render()===7&&st.done[n]){petals(30);setTimeout(()=>document.getElementById('modal').classList.add('show'),400)}
+});
+function petals(k){for(let i=0;i<k;i++){const p=document.createElement('div');p.className='petal';p.textContent=['🌸','🧡','✨'][i%3];p.style.left=Math.random()*100+'vw';p.style.animationDuration=(2+Math.random()*2)+'s';document.body.appendChild(p);setTimeout(()=>p.remove(),4200)}}
+function closeModal(){document.getElementById('modal').classList.remove('show');document.getElementById('record').scrollIntoView()}
+document.querySelectorAll('.rec tr[data-k]').forEach(tr=>{
+  const k=tr.dataset.k,[a,b]=tr.querySelectorAll('input'),out=tr.querySelector('.diff');
+  const upd=()=>{const x=parseFloat(a.value),y=parseFloat(b.value);out.textContent=(isNaN(x)||isNaN(y))?'—':((y-x>0?'+':'')+(Math.round((y-x)*10)/10)+'cm');};
+  a.value=(st.rec[k]||[])[0]||'';b.value=(st.rec[k]||[])[1]||'';upd();
+  [a,b].forEach(inp=>inp.addEventListener('input',()=>{st.rec[k]=[a.value,b.value];save();upd()}));
+});
+render();
+</script>
+</body>
+</html>
